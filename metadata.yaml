@@ -1,5 +1,5 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/axon-tag'
 versions:
-  - sha: ac39112bb3a77700092ba688a5b61b60206e3d02
+  - sha: daaee771c8c0d6b57ea8ccd322df45ca6e16d566
     changeNotes: Initial release.
