@@ -1,5 +1,7 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/axon-tag'
 versions:
+  - sha: be4f5c28719f860435f91c657c6ba4b79eae360a
+    changeNotes: Fixed auto-mapped 'value' from Event Data items array.
   - sha: daaee771c8c0d6b57ea8ccd322df45ca6e16d566
     changeNotes: Initial release.

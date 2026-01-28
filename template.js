@@ -15,6 +15,7 @@ const logToConsole = require('logToConsole');
 const makeInteger = require('makeInteger');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
+const Math = require('Math');
 const Object = require('Object');
 const parseUrl = require('parseUrl');
 const sendHttpRequest = require('sendHttpRequest');
@@ -218,15 +219,15 @@ function addEventData(data, eventData, serverEvent) {
       currencyFromItems = items[0].currency;
       items.forEach((i) => {
         const formattedItem = formatItem(data, i);
-        valueFromItems += formattedItem.quantity
-          ? formattedItem.quantity * formattedItem.price
-          : formattedItem.price;
+        if (isValidValue(formattedItem.price)) {
+          valueFromItems += (formattedItem.quantity || 1) * (formattedItem.price || 0);
+        }
         eventPayloadData.items.push(formattedItem);
       });
     }
 
     if (isValidValue(eventData.value)) eventPayloadData.value = makeNumber(eventData.value);
-    else if (isValidValue(valueFromItems)) eventPayloadData.value = valueFromItems;
+    else if (isValidValue(valueFromItems)) eventPayloadData.value = roundValue(valueFromItems);
 
     if (isValidValue(eventData.tax)) eventPayloadData.tax = makeNumber(eventData.tax);
     if (isValidValue(eventData.shipping)) {
@@ -594,7 +595,7 @@ function shouldExitEarly(data, eventData) {
 
 function isValidValue(value) {
   const valueType = getType(value);
-  return valueType !== 'null' && valueType !== 'undefined' && value !== '';
+  return valueType !== 'null' && valueType !== 'undefined' && value !== '' && value === value;
 }
 
 function isUIFieldTrue(field) {
@@ -643,6 +644,11 @@ function hashData(value) {
   return sha256Sync(makeString(value).trim().toLowerCase(), {
     outputEncoding: 'hex'
   });
+}
+
+function roundValue(value) {
+  if (!value) return value;
+  return Math.round(makeNumber(value) * 100) / 100;
 }
 
 function random() {
