@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Axon (AppLovin) Server API",
+  "displayName": "Axon (AppLovin) Server API by Stape",
   "categories": [
     "ADVERTISING",
     "CONVERSIONS",
@@ -1663,11 +1663,7 @@ function sendEvent(data, mappedData) {
       });
 
       if (!data.useOptimisticScenario) {
-        if (response.statusCode === 200) {
-          return data.gtmOnSuccess();
-        } else if (response.statusCode === 400 || response.statusCode === 401) {
-          return data.gtmOnFailure();
-        }
+        return response.statusCode === 200 ? data.gtmOnSuccess() : data.gtmOnFailure();
       }
     })
     .catch((error) => {
@@ -2384,6 +2380,10 @@ scenarios: []
 
 
 ___NOTES___
+
+2026-04-22 - Change Notes:
+  - Add "by Stape" branding to the template display name
+  - Simplify HTTP response handling to treat any non-200 status as a failure, removing the previous special-casing of 400/401 that left other error codes unhandled
 
 Created on 02/01/2026, 08:15:52
 
