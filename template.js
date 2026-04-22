@@ -556,11 +556,7 @@ function sendEvent(data, mappedData) {
       });
 
       if (!data.useOptimisticScenario) {
-        if (response.statusCode === 200) {
-          return data.gtmOnSuccess();
-        } else if (response.statusCode === 400 || response.statusCode === 401) {
-          return data.gtmOnFailure();
-        }
+        return response.statusCode === 200 ? data.gtmOnSuccess() : data.gtmOnFailure();
       }
     })
     .catch((error) => {
