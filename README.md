@@ -83,3 +83,6 @@ This server-side tag allows you to send events to AppLovin via the Axon Server-t
 ## Open Source
 
 The **Axon (AppLovin) Server API Tag for GTM Server Side** is developed and maintained by the [Stape Team](https://stape.io/) under the Apache 2.0 license.
+
+### GTM Gallery Status
+🟢 [Listed](https://tagmanager.google.com/gallery/#/owners/stape-io/templates/axon-tag)
