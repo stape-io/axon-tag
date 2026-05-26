@@ -1,11 +1,9 @@
-const BigQuery = require('BigQuery');
 const computeEffectiveTldPlusOne = require('computeEffectiveTldPlusOne');
 const createRegex = require('createRegex');
 const encodeUriComponent = require('encodeUriComponent');
 const generateRandom = require('generateRandom');
 const getAllEventData = require('getAllEventData');
 const getCookieValues = require('getCookieValues');
-const getContainerVersion = require('getContainerVersion');
 const getEventData = require('getEventData');
 const getRequestHeader = require('getRequestHeader');
 const getTimestampMillis = require('getTimestampMillis');
@@ -39,7 +37,7 @@ if (validationMessage) {
     Name: 'Axon',
     Type: 'Message',
     EventName: mappedData[0].name,
-    Message: 'Request was not sent.',
+    Message: '🛑 [ERROR] Request was not sent.',
     Reason: validationMessage
   });
   return data.gtmOnFailure();
@@ -535,38 +533,13 @@ function sendEvent(data, mappedData) {
   };
   const eventName = mappedData[0].name;
 
-  log({
-    Name: 'Axon',
-    Type: 'Request',
-    EventName: eventName,
-    RequestMethod: requestOptions.method,
-    RequestUrl: requestUrl,
-    RequestBody: mappedData
-  });
-
   return sendHttpRequest(requestUrl, requestOptions, JSON.stringify(mappedData))
     .then((response) => {
-      log({
-        Name: 'Axon',
-        Type: 'Response',
-        EventName: eventName,
-        ResponseStatusCode: response.statusCode,
-        ResponseHeaders: response.headers,
-        ResponseBody: response.body
-      });
-
       if (!data.useOptimisticScenario) {
         return response.statusCode === 200 ? data.gtmOnSuccess() : data.gtmOnFailure();
       }
     })
     .catch((error) => {
-      log({
-        Name: 'Axon',
-        Type: 'Message',
-        EventName: eventName,
-        Message: 'API call failed or timed out.',
-        Reason: JSON.stringify(error)
-      });
       if (!data.useOptimisticScenario) return data.gtmOnFailure();
     });
 }
@@ -680,89 +653,6 @@ function isConsentGivenOrNotRequired(data, eventData) {
 }
 
 function log(rawDataToLog) {
-  const logDestinationsHandlers = {};
-  if (determinateIsLoggingEnabled()) logDestinationsHandlers.console = logConsole;
-  if (determinateIsLoggingEnabledForBigQuery()) logDestinationsHandlers.bigQuery = logToBigQuery;
-
   rawDataToLog.TraceId = getRequestHeader('trace-id');
-
-  const keyMappings = {
-    // No transformation for Console is needed.
-    bigQuery: {
-      Name: 'tag_name',
-      Type: 'type',
-      TraceId: 'trace_id',
-      EventName: 'event_name',
-      RequestMethod: 'request_method',
-      RequestUrl: 'request_url',
-      RequestBody: 'request_body',
-      ResponseStatusCode: 'response_status_code',
-      ResponseHeaders: 'response_headers',
-      ResponseBody: 'response_body'
-    }
-  };
-
-  for (const logDestination in logDestinationsHandlers) {
-    const handler = logDestinationsHandlers[logDestination];
-    if (!handler) continue;
-
-    const mapping = keyMappings[logDestination];
-    const dataToLog = mapping ? {} : rawDataToLog;
-
-    if (mapping) {
-      for (const key in rawDataToLog) {
-        const mappedKey = mapping[key] || key;
-        dataToLog[mappedKey] = rawDataToLog[key];
-      }
-    }
-
-    handler(dataToLog);
-  }
-}
-
-function logConsole(dataToLog) {
-  logToConsole(JSON.stringify(dataToLog));
-}
-
-function logToBigQuery(dataToLog) {
-  const connectionInfo = {
-    projectId: data.logBigQueryProjectId,
-    datasetId: data.logBigQueryDatasetId,
-    tableId: data.logBigQueryTableId
-  };
-
-  dataToLog.timestamp = getTimestampMillis();
-
-  ['request_body', 'response_headers', 'response_body'].forEach((p) => {
-    dataToLog[p] = JSON.stringify(dataToLog[p]);
-  });
-
-  BigQuery.insert(connectionInfo, [dataToLog], { ignoreUnknownValues: true });
-}
-
-function determinateIsLoggingEnabled() {
-  const containerVersion = getContainerVersion();
-  const isDebug = !!(
-    containerVersion &&
-    (containerVersion.debugMode || containerVersion.previewMode)
-  );
-
-  if (!data.logType) {
-    return isDebug;
-  }
-
-  if (data.logType === 'no') {
-    return false;
-  }
-
-  if (data.logType === 'debug') {
-    return isDebug;
-  }
-
-  return data.logType === 'always';
-}
-
-function determinateIsLoggingEnabledForBigQuery() {
-  if (data.bigQueryLogType === 'no') return false;
-  return data.bigQueryLogType === 'always';
+  logToConsole(JSON.stringify(rawDataToLog));
 }
