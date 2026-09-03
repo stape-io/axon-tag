@@ -1,6 +1,8 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/axon-tag'
 versions:
+  - sha: 27ad87e884f5cc9c5341a0de88dea78787b0c21b
+    changeNotes: Fix request payload to nest the mapped event under a top-level events array.
   - sha: 4c0d0a8ca1821b833ec728df9a607100b4f10a2c
     changeNotes: Logging removal.
   - sha: 7e416502e5ea0149740c5eb8887499b8888cd585

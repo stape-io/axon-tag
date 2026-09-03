@@ -28,15 +28,15 @@ const eventData = getAllEventData();
 if (shouldExitEarly(data, eventData)) return;
 
 const mappedData = mapEvent(data, eventData);
-setClientIdCookie(data, mappedData[0].user_data.client_id);
-setClickIdCookies(data, mappedData[0].user_data.aleid, mappedData[0].user_data.alart);
+setClientIdCookie(data, mappedData.events[0].user_data.client_id);
+setClickIdCookies(data, mappedData.events[0].user_data.aleid, mappedData.events[0].user_data.alart);
 
-const validationMessage = validateMappedData(mappedData[0]);
+const validationMessage = validateMappedData(mappedData.events[0]);
 if (validationMessage) {
   log({
     Name: 'Axon',
     Type: 'Message',
-    EventName: mappedData[0].name,
+    EventName: mappedData.events[0].name,
     Message: '🛑 [ERROR] Request was not sent.',
     Reason: validationMessage
   });
@@ -482,7 +482,7 @@ function mapEvent(data, eventData) {
   const serverEvent = {
     name: mapEventName(data, eventData)
   };
-  const mappedData = [serverEvent];
+  const mappedData = { events: [serverEvent] };
 
   addServerEventData(data, eventData, serverEvent);
   addEventData(data, eventData, serverEvent);
@@ -531,7 +531,6 @@ function sendEvent(data, mappedData) {
       Authorization: data.apiKey
     }
   };
-  const eventName = mappedData[0].name;
 
   return sendHttpRequest(requestUrl, requestOptions, JSON.stringify(mappedData))
     .then((response) => {

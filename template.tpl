@@ -1026,15 +1026,15 @@ const eventData = getAllEventData();
 if (shouldExitEarly(data, eventData)) return;
 
 const mappedData = mapEvent(data, eventData);
-setClientIdCookie(data, mappedData[0].user_data.client_id);
-setClickIdCookies(data, mappedData[0].user_data.aleid, mappedData[0].user_data.alart);
+setClientIdCookie(data, mappedData.events[0].user_data.client_id);
+setClickIdCookies(data, mappedData.events[0].user_data.aleid, mappedData.events[0].user_data.alart);
 
-const validationMessage = validateMappedData(mappedData[0]);
+const validationMessage = validateMappedData(mappedData.events[0]);
 if (validationMessage) {
   log({
     Name: 'Axon',
     Type: 'Message',
-    EventName: mappedData[0].name,
+    EventName: mappedData.events[0].name,
     Message: '🛑 [ERROR] Request was not sent.',
     Reason: validationMessage
   });
@@ -1480,7 +1480,7 @@ function mapEvent(data, eventData) {
   const serverEvent = {
     name: mapEventName(data, eventData)
   };
-  const mappedData = [serverEvent];
+  const mappedData = { events: [serverEvent] };
 
   addServerEventData(data, eventData, serverEvent);
   addEventData(data, eventData, serverEvent);
@@ -1529,7 +1529,6 @@ function sendEvent(data, mappedData) {
       Authorization: data.apiKey
     }
   };
-  const eventName = mappedData[0].name;
 
   return sendHttpRequest(requestUrl, requestOptions, JSON.stringify(mappedData))
     .then((response) => {
@@ -2086,10 +2085,155 @@ ___SERVER_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
+scenarios:
+- name: '[Early Exit] Calls gtmOnSuccess without sending a request when required consent
+    is not granted'
+  code: |-
+    mockData.adStorageConsent = 'required';
+    mock('getAllEventData', () => ({}));
+
+    runCode(mockData);
+
+    assertApi('sendHttpRequest').wasNotCalled();
+    assertApi('gtmOnSuccess').wasCalled();
+    assertApi('gtmOnFailure').wasNotCalled();
+- name: '[Request Payload] Body has a top-level events key holding an array with the
+    server event object'
+  code: |-
+    mock('sendHttpRequest', (url, options, body) => {
+      const parsedBody = JSON.parse(body);
+
+      assertThat(parsedBody).isEqualTo({
+        events: [
+          {
+            name: 'purchase',
+            event_time: 1700000000000,
+            event_source_url: 'https://example.com/checkout',
+            data: {},
+            user_data: {
+              esi: 'web',
+              email: '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
+            }
+          }
+        ]
+      });
+
+      return Promise.create((resolve) => resolve({ statusCode: 200 }));
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[Validation] Calls gtmOnFailure and skips the request when no user identifier
+    is present'
+  code: |-
+    mockData.userDataParametersList = [];
+
+    runCode(mockData);
+
+    assertApi('sendHttpRequest').wasNotCalled();
+    assertApi('gtmOnSuccess').wasNotCalled();
+    assertApi('gtmOnFailure').wasCalled();
+- name: '[Event Name] Inherits the event name from the client event data when using
+    inherit mode'
+  code: |-
+    mockData.eventType = 'inherit';
+    mock('getAllEventData', () => ({ event_name: 'view_item' }));
+
+    mock('sendHttpRequest', (url, options, body) => {
+      const parsedBody = JSON.parse(body);
+      assertThat(parsedBody.events[0].name).isEqualTo('view_item');
+
+      return Promise.create((resolve) => resolve({ statusCode: 200 }));
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[Success] Calls gtmOnSuccess when the response status is 200'
+  code: |-
+    mock('sendHttpRequest', () => {
+      return Promise.create((resolve) => resolve({ statusCode: 200 }));
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[Failure] Calls gtmOnFailure when the response status is not 200'
+  code: |-
+    mock('sendHttpRequest', () => {
+      return Promise.create((resolve) => resolve({ statusCode: 500 }));
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasNotCalled();
+      assertApi('gtmOnFailure').wasCalled();
+    });
+- name: '[Failure] Calls gtmOnFailure when the request promise rejects'
+  code: |-
+    mock('sendHttpRequest', () => {
+      return Promise.create((resolve, reject) => reject());
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasNotCalled();
+      assertApi('gtmOnFailure').wasCalled();
+    });
+setup: |-
+  const JSON = require('JSON');
+  const Promise = require('Promise');
+  const callLater = require('callLater');
+
+  mock('getAllEventData', () => ({}));
+  mock('getCookieValues', () => []);
+  mock('getRequestHeader', () => undefined);
+
+  const mockData = {
+    eventType: 'standard',
+    eventNameStandard: 'purchase',
+    apiKey: 'test-api-key',
+    pixelId: 'pixel-123',
+    eventSource: 'web',
+    setClientIdCookie: false,
+    setClickIdCookie: false,
+    autoMapServerEventDataParameters: false,
+    eventSourceUrl: 'https://example.com/checkout',
+    eventTimestamp: 1700000000000,
+    autoMapEventDataParameters: false,
+    eventDataParametersList: [],
+    autoMapUserDataParameters: false,
+    userDataParametersList: [
+      { name: 'email', value: '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' }
+    ],
+    addMeasurementData: false,
+    adStorageConsent: 'optional',
+    useOptimisticScenario: false
+  };
 
 
 ___NOTES___
+
+2026-09-03 - Change Notes:
+  - Fix request payload sent to AppLovin's Axon API: the mapped event is now nested under a top-level "events" array key ({ events: [serverEvent] }) instead of being returned as a bare array, matching Axon's expected schema
+  - Add unit test coverage for the tag's core execution paths (payload shape, HTTP success/failure/rejection, user-identifier validation, consent-based early exit, and inherited event-name mapping), replacing the previously empty test suite
 
 2026-05-26 Change Notes:
  - Logging removal.
