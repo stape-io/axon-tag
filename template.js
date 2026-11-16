@@ -121,7 +121,7 @@ function setClientIdCookie(data, clientId) {
 
   if (clientId) setCookie('axcid', clientId, cookieOptions, false);
 
-  // Ref: https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/google-tag-manager#enhanced-user-identification-recommended
+  // Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/google-tag-manager#enhanced-user-identification-recommended
   const axwrt = getCookieValues('_axwrt')[0];
   if (axwrt) {
     cookieOptions.httpOnly = false;
@@ -278,6 +278,12 @@ function addEventData(data, eventData, serverEvent) {
     });
   }
 
+  // Required for 'purchase' events. Axon expects 0 when there is no shipping or tax.
+  if (serverEvent.name === 'purchase') {
+    if (!isValidValue(eventPayloadData.shipping)) eventPayloadData.shipping = 0;
+    if (!isValidValue(eventPayloadData.tax)) eventPayloadData.tax = 0;
+  }
+
   serverEvent.data = eventPayloadData;
 
   return eventPayloadData;
@@ -314,7 +320,7 @@ function getPhoneNumberFromEventData(eventData) {
   const phoneType = getType(phone);
 
   if (phoneType === 'string') return phone;
-  else if (phoneType === 'array' && phoneType === 'object') return phone[0];
+  else if (phoneType === 'array' || phoneType === 'object') return phone[0];
 }
 
 function getUserAddressFromEventData(eventData) {
@@ -377,7 +383,11 @@ function addUserData(data, eventData, serverEvent) {
     if (phone) userData.phone = phone;
 
     const address = getUserAddressFromEventData(eventData);
-    if (address.postalCode && address.country_code === 'US') userData.zip = address.postalCode;
+    if (address.postalCode) {
+      const zip = makeString(address.postalCode).trim();
+      // U.S. ZIP codes must include only the first five digits.
+      userData.zip = makeString(address.country).toUpperCase() === 'US' ? zip.slice(0, 5) : zip;
+    }
     if (address.country) userData.country_code = address.country;
   }
 
@@ -452,10 +462,25 @@ function normalizeBasedOnSchemaKey(schemaKey, value) {
   const normalizePhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return phoneNumber;
     const nonDigitsRegex = createRegex('[^0-9]', 'g');
-    return phoneNumber.replace(nonDigitsRegex, '');
+    const leadingZerosRegex = createRegex('^0+');
+    return makeString(phoneNumber).replace(nonDigitsRegex, '').replace(leadingZerosRegex, '');
+  };
+
+  // Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/order-history-data/#field-specifications
+  const normalizeEmail = (email) => {
+    if (getType(email) !== 'string') return email;
+    const emailParts = email.trim().toLowerCase().split('@');
+    if (emailParts.length !== 2) return email;
+    const domain = emailParts[1];
+    if (domain !== 'gmail.com' && domain !== 'googlemail.com') return email;
+    const localPart = emailParts[0].split('+')[0].split('.').join('');
+    if (!localPart) return undefined;
+    return localPart + '@' + domain;
   };
 
   switch (schemaKey) {
+    case 'email':
+      return normalizeEmail(value);
     case 'phone':
       return normalizePhoneNumber(value);
     default:
@@ -467,12 +492,32 @@ function hashDataIfNeeded(serverEvent) {
   const userData = serverEvent.user_data;
   const hasUserData = getType(userData) === 'object' && Object.entries(userData).length > 0;
   if (hasUserData) {
+    // phone_last10_hashed must be derived from the raw phone, before it gets hashed.
+    if (userData.phone_last10_hashed) {
+      userData.phone_last10_hashed = isHashed(userData.phone_last10_hashed)
+        ? makeString(userData.phone_last10_hashed).toLowerCase()
+        : getPhoneLast10Hash(userData.phone_last10_hashed);
+    } else if (
+      ['string', 'number'].indexOf(getType(userData.phone)) !== -1 &&
+      !isHashed(userData.phone)
+    ) {
+      const phoneLast10Hash = getPhoneLast10Hash(userData.phone);
+      if (phoneLast10Hash) userData.phone_last10_hashed = phoneLast10Hash;
+    }
+
     const userDataKeysToHash = ['email', 'phone'];
     userDataKeysToHash.forEach((key) => {
       const value = userData[key];
       if (!value) return;
-      userData[key] = hashData(normalizeBasedOnSchemaKey(key, value));
+      userData[key] = isHashed(value)
+        ? makeString(value).toLowerCase()
+        : hashData(normalizeBasedOnSchemaKey(key, value));
     });
+
+    // Axon: "Do not reuse the phone hash" for phone_last10_hashed.
+    if (userData.phone_last10_hashed && userData.phone_last10_hashed === userData.phone) {
+      userData.phone_last10_hashed = undefined;
+    }
   }
 
   return serverEvent;
@@ -612,6 +657,16 @@ function hashData(value) {
   return sha256Sync(makeString(value).trim().toLowerCase(), {
     outputEncoding: 'hex'
   });
+}
+
+// Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/order-history-data/#field-specifications
+function getPhoneLast10Hash(rawPhone) {
+  if (!rawPhone) return;
+  const phoneStr = makeString(rawPhone);
+  if (phoneStr.match('[A-Za-z]') !== null) return;
+  const digits = phoneStr.replace(createRegex('[^0-9]', 'g'), '');
+  if (digits.length < 10) return;
+  return sha256Sync(digits.slice(-10), { outputEncoding: 'hex' });
 }
 
 function roundValue(value) {
