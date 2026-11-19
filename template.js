@@ -610,7 +610,8 @@ function shouldExitEarly(data, eventData) {
 
 function isValidValue(value) {
   const valueType = getType(value);
-  return valueType !== 'null' && valueType !== 'undefined' && value !== '' && value === value;
+  if (valueType === 'null' || valueType === 'undefined' || value !== value) return false;
+  return value !== '' && value !== 'undefined' && value !== 'null';
 }
 
 function isUIFieldTrue(field) {
