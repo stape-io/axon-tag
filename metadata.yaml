@@ -1,7 +1,7 @@
 homepage: 'https://stape.io/'
 documentation: 'https://github.com/stape-io/axon-tag'
 versions:
-  - sha: 0a82e83e8af5582de851be5bfb7f6f21e14c3401
+  - sha: 5b6ba697254ff14a933406620cec65782866587b
     changeNotes: Add new field "phone_last10_hashed" and minor code improvements.
   - sha: 27ad87e884f5cc9c5341a0de88dea78787b0c21b
     changeNotes: Fix request payload to nest the mapped event under a top-level events array.
