@@ -1495,8 +1495,9 @@ function hashDataIfNeeded(serverEvent) {
   const hasUserData = getType(userData) === 'object' && Object.entries(userData).length > 0;
   if (hasUserData) {
     // phone_last10_hashed must be derived from the raw phone, before it gets hashed.
+    const isPhoneLast10ProvidedHashed = isHashed(userData.phone_last10_hashed);
     if (userData.phone_last10_hashed) {
-      userData.phone_last10_hashed = isHashed(userData.phone_last10_hashed)
+      userData.phone_last10_hashed = isPhoneLast10ProvidedHashed
         ? makeString(userData.phone_last10_hashed).toLowerCase()
         : getPhoneLast10Hash(userData.phone_last10_hashed);
     } else if (
@@ -1516,8 +1517,9 @@ function hashDataIfNeeded(serverEvent) {
         : hashData(normalizeBasedOnSchemaKey(key, value));
     });
 
-    // Axon: "Do not reuse the phone hash" for phone_last10_hashed.
-    if (userData.phone_last10_hashed && userData.phone_last10_hashed === userData.phone) {
+    // Axon: "Do not copy the phone hash into this field". Only a hash supplied by the user can be
+    // such a copy: one computed here equals the phone hash when the phone has no country code.
+    if (isPhoneLast10ProvidedHashed && userData.phone_last10_hashed === userData.phone) {
       userData.phone_last10_hashed = undefined;
     }
   }
@@ -2334,6 +2336,21 @@ scenarios:
         ],
         expectedPhone: PHONE_US_HASH,
         expectedLast10: undefined
+      },
+      {
+        description: 'plaintext 10-digit phone without country code keeps the derived last10',
+        userData: [{ name: 'phone', value: '(415) 555-9317' }],
+        expectedPhone: LAST10_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      },
+      {
+        description: 'manual plaintext last10 matching a 10-digit phone is kept',
+        userData: [
+          { name: 'phone', value: '4155559317' },
+          { name: 'phone_last10_hashed', value: '4155559317' }
+        ],
+        expectedPhone: LAST10_US_HASH,
+        expectedLast10: LAST10_US_HASH
       }
     ].forEach((scenario) => {
       cleanup();
