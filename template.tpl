@@ -125,7 +125,7 @@ ___TEMPLATE_PARAMETERS___
             "value": "inherit",
             "subParams": [],
             "displayValue": "Inherit from client",
-            "help": "If the request follows the \u003cb\u003eGoogle Analytics 4 (GA4)\u003c/b\u003e event naming schema, the following event names will be mapped to Axon event names:\n\u003cbr/\u003e\u003cbr/\u003e \n\u003cul\u003e \n\u003cli\u003epage_view \u003c/li\u003e \n\u003cli\u003eview_item\u003c/li\u003e\n\u003cli\u003eview_cart\u003c/li\u003e\n\u003cli\u003eadd_to_cart\u003c/li\u003e\n\u003cli\u003eremove_from_cart\u003c/li\u003e\n\u003cli\u003ebegin_checkout\u003c/li\u003e\n\u003cli\u003eadd_payment_info\u003c/li\u003e\n\u003cli\u003epurchase\u003c/li\u003e\n\u003cli\u003egenerate_lead\u003c/li\u003e\n\u003cli\u003elogin\u003c/li\u003e\n\u003cli\u003esign_up\u003c/li\u003e\n\u003cli\u003esearch\u003c/li\u003e\n\u003cli\u003eview_search_results → search\u003c/li\u003e\n\u003cli\u003esubscribe\u003c/li\u003e\n\u003cli\u003eapp_open\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\nAny other event names will cause the event to fail. Check the \u003ca href\u003d\"https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-\u003c/a\u003eintegration/events-and-objects\"\u003elist of supported event names."
+            "help": "If the request follows the \u003cb\u003eGoogle Analytics 4 (GA4)\u003c/b\u003e event naming schema, the following event names will be mapped to Axon event names:\n\u003cbr/\u003e\u003cbr/\u003e \n\u003cul\u003e \n\u003cli\u003epage_view \u003c/li\u003e \n\u003cli\u003eview_item\u003c/li\u003e\n\u003cli\u003eview_cart\u003c/li\u003e\n\u003cli\u003eadd_to_cart\u003c/li\u003e\n\u003cli\u003eremove_from_cart\u003c/li\u003e\n\u003cli\u003ebegin_checkout\u003c/li\u003e\n\u003cli\u003eadd_payment_info\u003c/li\u003e\n\u003cli\u003epurchase\u003c/li\u003e\n\u003cli\u003egenerate_lead\u003c/li\u003e\n\u003cli\u003elogin\u003c/li\u003e\n\u003cli\u003esign_up\u003c/li\u003e\n\u003cli\u003esearch\u003c/li\u003e\n\u003cli\u003eview_search_results → search\u003c/li\u003e\n\u003cli\u003esubscribe\u003c/li\u003e\n\u003cli\u003eapp_open\u003c/li\u003e\n\u003c/ul\u003e\n\u003cbr/\u003e\nAny other event names will cause the event to fail. Check the \u003ca href\u003d\"https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/events-and-objects\"\u003elist of supported event names\u003c/a\u003e."
           }
         ],
         "simpleValueType": true,
@@ -203,7 +203,7 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "help": "If \u003cb\u003efalse\u003c/b\u003e, and if an existing Client ID cookie is found or was added to the \u003ci\u003eUser Data Parameters\u003c/i\u003e, it will still be sent in the request but not stored as a cookie. It also won\u0027t be auto-generated.\n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003cb\u003etrue\u003c/b\u003e, the Client ID will be sent in the request and stored as the \u003ci\u003eaxcid\u003c/i\u003e cookie by server GTM. If it\u0027s not found in the possible sources, it will be auto-generated and set in the cookie. \n\u003cbr/\u003e\nThe \u003ci\u003e_axwrt\u003c/i\u003e JS script cookie will also be rewritten into the \u003ci\u003eaxwrt\u003c/i\u003e, but never as HTTP Only cookie. \u003ca href\u003d\"https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/google-tag-manager#enhanced-user-identification-recommended\"\u003eLearn more\u003c/a\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nThe Client ID is, in this order, sourced from:\n\u003cul\u003e\n\u003cli\u003e\u003ci\u003eaxcid\u003c/i\u003e cookie from server GTM\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eaxwrt\u003c/i\u003e cookie from server GTM\u003c/li\u003e\n\u003cli\u003e\u003ci\u003e_axwrt\u003c/i\u003e cookie from the JS script\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eClient ID\u003c/i\u003e from the User Data Parameters section\u003c/li\u003e\n\u003c/ul\u003e",
+        "help": "If \u003cb\u003efalse\u003c/b\u003e, and if an existing Client ID cookie is found or was added to the \u003ci\u003eUser Data Parameters\u003c/i\u003e, it will still be sent in the request but not stored as a cookie. It also won\u0027t be auto-generated.\n\u003cbr/\u003e\u003cbr/\u003e\nIf \u003cb\u003etrue\u003c/b\u003e, the Client ID will be sent in the request and stored as the \u003ci\u003eaxcid\u003c/i\u003e cookie by server GTM. If it\u0027s not found in the possible sources, it will be auto-generated and set in the cookie. \n\u003cbr/\u003e\nThe \u003ci\u003e_axwrt\u003c/i\u003e JS script cookie will also be rewritten into the \u003ci\u003eaxwrt\u003c/i\u003e, but never as HTTP Only cookie. \u003ca href\u003d\"https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/google-tag-manager#enhanced-user-identification-recommended\"\u003eLearn more\u003c/a\u003e.\n\u003cbr/\u003e\u003cbr/\u003e\nThe Client ID is, in this order, sourced from:\n\u003cul\u003e\n\u003cli\u003e\u003ci\u003eaxcid\u003c/i\u003e cookie from server GTM\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eaxwrt\u003c/i\u003e cookie from server GTM\u003c/li\u003e\n\u003cli\u003e\u003ci\u003e_axwrt\u003c/i\u003e cookie from the JS script\u003c/li\u003e\n\u003cli\u003e\u003ci\u003eClient ID\u003c/i\u003e from the User Data Parameters section\u003c/li\u003e\n\u003c/ul\u003e",
         "defaultValue": true,
         "subParams": [
           {
@@ -443,7 +443,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "dedupeId",
         "displayName": "Dedupe ID",
         "simpleValueType": true,
-        "help": "A unique identifier for this event. This will be used for de-duplication of the event from a redundant setup (Client Side Pixel + Server Side API). \n\u003cbr/\u003e\n\u003ca href\u003d\"https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/global-best-practices/\"\u003eLearn more\u003c/a\u003e."
+        "help": "A unique identifier for this event. This will be used for de-duplication of the event from a redundant setup (Client Side Pixel + Server Side API). \n\u003cbr/\u003e\n\u003ca href\u003d\"https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/global-best-practices/\"\u003eLearn more\u003c/a\u003e."
       }
     ]
   },
@@ -456,7 +456,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "LABEL",
         "name": "eventDataGroupLabel",
-        "displayName": "Check this help page \u003ca href\u003d\"https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/events-and-objects\"\u003e[1]\u003c/a\u003e for a description of each \u003ci\u003eEvent Data Parameters\u003c/i\u003e and its expected type and value.\n\u003cbr/\u003e\nNote that certain events contain required parameters."
+        "displayName": "Check this help page \u003ca href\u003d\"https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/events-and-objects\"\u003e[1]\u003c/a\u003e for a description of each \u003ci\u003eEvent Data Parameters\u003c/i\u003e and its expected type and value.\n\u003cbr/\u003e\nNote that certain events contain required parameters."
       },
       {
         "type": "SELECT",
@@ -596,7 +596,7 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "help": "If enabled, the tag will attempt to automatically map parameters from your event data. \n\u003cbr/\u003e\u003cbr/\u003e\nAny value you manually enter in a field below will always override the auto-mapped value.\n\u003cbr/\u003e\u003cbr/\u003e\nDefault mappings:\n\u003cul\u003e \n\u003cli\u003ealeid (Click ID): \u003cul\u003e\u003cli\u003e\u0027aleid\u0027 URL parameter\u003c/li\u003e\u003cli\u003e\u0027axeid\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axeid\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \u003cli\u003ealart (Click ID): \u003cul\u003e\u003cli\u003e\u0027alart\u0027 URL parameter\u003c/li\u003e\u003cli\u003e\u0027axart\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axart\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \u003cli\u003eClient ID: \u003cul\u003e\u003cli\u003e\u0027axcid\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027axwrt\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axwrt\u0027 JS cookie\u003c/li\u003e\u003cli\u003eeventData.client_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eaxwrt: \u003cul\u003e\u003cli\u003e\u0027axwrt\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axwrt\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eSession ID: \u003cul\u003e\u003cli\u003eClient ID + eventData. ga_session_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eUser ID: \u003cul\u003e\u003cli\u003eeventData.user_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eIP Address: \u003cul\u003e\u003cli\u003eeventData.ip_override\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eUser Agent: \u003cul\u003e\u003cli\u003eeventData.user_agent\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eApp Identifier for Advertisers (iOS IDFA or Android AAID/GAID): \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-resettable_device_id\u0027]\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \n\u003cli\u003eApp Identifier for Vendors (iOS IDFV): \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-vendor_device_id\u0027]\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003ePlatform: \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-platform\u0027] (iOS and Android only)\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eEmail: \u003cul\u003e\u003cli\u003eeventData.email\u003c/li\u003e\u003cli\u003eeventData.email_address\u003c/li\u003e\u003cli\u003eeventData.userData.email\u003c/li\u003e\u003cli\u003eeventData.userData.email_address\u003c/li\u003e\u003cli\u003eeventData.userData.sha256_email\u003c/li\u003e\u003cli\u003eeventData.userData.sha256_email_address\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003ePhone: \u003cul\u003e\u003cli\u003eeventData.phone\u003c/li\u003e\u003cli\u003eeventData.phone_number\u003c/li\u003e\u003cli\u003eeventData.userData.phone\u003c/li\u003e\u003cli\u003eeventData.userData.phone_number\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eZIP: \u003cul\u003e\u003cli\u003eeventData.address.postalCode\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eCountry Code: \u003cul\u003e\u003cli\u003eeventData.address.country\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \n\u003c/ul\u003e",
+        "help": "If enabled, the tag will attempt to automatically map parameters from your event data. \n\u003cbr/\u003e\u003cbr/\u003e\nAny value you manually enter in a field below will always override the auto-mapped value.\n\u003cbr/\u003e\u003cbr/\u003e\nDefault mappings:\n\u003cul\u003e \n\u003cli\u003ealeid (Click ID): \u003cul\u003e\u003cli\u003e\u0027aleid\u0027 URL parameter\u003c/li\u003e\u003cli\u003e\u0027axeid\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axeid\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \u003cli\u003ealart (Click ID): \u003cul\u003e\u003cli\u003e\u0027alart\u0027 URL parameter\u003c/li\u003e\u003cli\u003e\u0027axart\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axart\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \u003cli\u003eClient ID: \u003cul\u003e\u003cli\u003e\u0027axcid\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027axwrt\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axwrt\u0027 JS cookie\u003c/li\u003e\u003cli\u003eeventData.client_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eaxwrt: \u003cul\u003e\u003cli\u003e\u0027axwrt\u0027 Server cookie\u003c/li\u003e\u003cli\u003e\u0027_axwrt\u0027 JS cookie\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eSession ID: \u003cul\u003e\u003cli\u003eClient ID + eventData. ga_session_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eUser ID: \u003cul\u003e\u003cli\u003eeventData.user_id\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eIP Address: \u003cul\u003e\u003cli\u003eeventData.ip_override\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eUser Agent: \u003cul\u003e\u003cli\u003eeventData.user_agent\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eApp Identifier for Advertisers (iOS IDFA or Android AAID/GAID): \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-resettable_device_id\u0027]\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \n\u003cli\u003eApp Identifier for Vendors (iOS IDFV): \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-vendor_device_id\u0027]\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003ePlatform: \u003cul\u003e\u003cli\u003eeventData[\u0027x-ga-platform\u0027] (iOS and Android only)\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eEmail: \u003cul\u003e\u003cli\u003eeventData.email\u003c/li\u003e\u003cli\u003eeventData.email_address\u003c/li\u003e\u003cli\u003eeventData.userData.email\u003c/li\u003e\u003cli\u003eeventData.userData.email_address\u003c/li\u003e\u003cli\u003eeventData.userData.sha256_email\u003c/li\u003e\u003cli\u003eeventData.userData.sha256_email_address\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003ePhone: \u003cul\u003e\u003cli\u003eeventData.phone\u003c/li\u003e\u003cli\u003eeventData.phone_number\u003c/li\u003e\u003cli\u003eeventData.userData.phone\u003c/li\u003e\u003cli\u003eeventData.userData.phone_number\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003ePhone Number - Last 10 Digits: \u003cul\u003e\u003cli\u003eDerived from the mapped Phone Number (last 10 digits, SHA256 hashed), only when the phone is not already hashed\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eZIP: \u003cul\u003e\u003cli\u003eeventData.user_data.address.postal_code (first 5 digits only for US addresses)\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\u003cli\u003eCountry Code: \u003cul\u003e\u003cli\u003eeventData.user_data.address.country\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e \n\u003c/ul\u003e",
         "defaultValue": true,
         "alwaysInSummary": true
       },
@@ -660,6 +660,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "phone",
                 "displayValue": "Phone Number (if not SHA256 hashed, it will be automatically hashed)"
+              },
+              {
+                "value": "phone_last10_hashed",
+                "displayValue": "Phone Number - Last 10 Digits (if not SHA256 hashed, it will be normalized and hashed automatically)"
               },
               {
                 "value": "client_ip_address",
@@ -1119,7 +1123,7 @@ function setClientIdCookie(data, clientId) {
 
   if (clientId) setCookie('axcid', clientId, cookieOptions, false);
 
-  // Ref: https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/google-tag-manager#enhanced-user-identification-recommended
+  // Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/google-tag-manager#enhanced-user-identification-recommended
   const axwrt = getCookieValues('_axwrt')[0];
   if (axwrt) {
     cookieOptions.httpOnly = false;
@@ -1276,6 +1280,12 @@ function addEventData(data, eventData, serverEvent) {
     });
   }
 
+  // Required for 'purchase' events. Axon expects 0 when there is no shipping or tax.
+  if (serverEvent.name === 'purchase') {
+    if (!isValidValue(eventPayloadData.shipping)) eventPayloadData.shipping = 0;
+    if (!isValidValue(eventPayloadData.tax)) eventPayloadData.tax = 0;
+  }
+
   serverEvent.data = eventPayloadData;
 
   return eventPayloadData;
@@ -1312,7 +1322,7 @@ function getPhoneNumberFromEventData(eventData) {
   const phoneType = getType(phone);
 
   if (phoneType === 'string') return phone;
-  else if (phoneType === 'array' && phoneType === 'object') return phone[0];
+  else if (phoneType === 'array' || phoneType === 'object') return phone[0];
 }
 
 function getUserAddressFromEventData(eventData) {
@@ -1375,7 +1385,11 @@ function addUserData(data, eventData, serverEvent) {
     if (phone) userData.phone = phone;
 
     const address = getUserAddressFromEventData(eventData);
-    if (address.postalCode && address.country_code === 'US') userData.zip = address.postalCode;
+    if (address.postalCode) {
+      const zip = makeString(address.postalCode).trim();
+      // U.S. ZIP codes must include only the first five digits.
+      userData.zip = makeString(address.country).toUpperCase() === 'US' ? zip.slice(0, 5) : zip;
+    }
     if (address.country) userData.country_code = address.country;
   }
 
@@ -1450,10 +1464,25 @@ function normalizeBasedOnSchemaKey(schemaKey, value) {
   const normalizePhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return phoneNumber;
     const nonDigitsRegex = createRegex('[^0-9]', 'g');
-    return phoneNumber.replace(nonDigitsRegex, '');
+    const leadingZerosRegex = createRegex('^0+');
+    return makeString(phoneNumber).replace(nonDigitsRegex, '').replace(leadingZerosRegex, '');
+  };
+
+  // Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/order-history-data/#field-specifications
+  const normalizeEmail = (email) => {
+    if (getType(email) !== 'string') return email;
+    const emailParts = email.trim().toLowerCase().split('@');
+    if (emailParts.length !== 2) return email;
+    const domain = emailParts[1];
+    if (domain !== 'gmail.com' && domain !== 'googlemail.com') return email;
+    const localPart = emailParts[0].split('+')[0].split('.').join('');
+    if (!localPart) return undefined;
+    return localPart + '@' + domain;
   };
 
   switch (schemaKey) {
+    case 'email':
+      return normalizeEmail(value);
     case 'phone':
       return normalizePhoneNumber(value);
     default:
@@ -1465,12 +1494,34 @@ function hashDataIfNeeded(serverEvent) {
   const userData = serverEvent.user_data;
   const hasUserData = getType(userData) === 'object' && Object.entries(userData).length > 0;
   if (hasUserData) {
+    // phone_last10_hashed must be derived from the raw phone, before it gets hashed.
+    const isPhoneLast10ProvidedHashed = isHashed(userData.phone_last10_hashed);
+    if (userData.phone_last10_hashed) {
+      userData.phone_last10_hashed = isPhoneLast10ProvidedHashed
+        ? makeString(userData.phone_last10_hashed).toLowerCase()
+        : getPhoneLast10Hash(userData.phone_last10_hashed);
+    } else if (
+      ['string', 'number'].indexOf(getType(userData.phone)) !== -1 &&
+      !isHashed(userData.phone)
+    ) {
+      const phoneLast10Hash = getPhoneLast10Hash(userData.phone);
+      if (phoneLast10Hash) userData.phone_last10_hashed = phoneLast10Hash;
+    }
+
     const userDataKeysToHash = ['email', 'phone'];
     userDataKeysToHash.forEach((key) => {
       const value = userData[key];
       if (!value) return;
-      userData[key] = hashData(normalizeBasedOnSchemaKey(key, value));
+      userData[key] = isHashed(value)
+        ? makeString(value).toLowerCase()
+        : hashData(normalizeBasedOnSchemaKey(key, value));
     });
+
+    // Axon: "Do not copy the phone hash into this field". Only a hash supplied by the user can be
+    // such a copy: one computed here equals the phone hash when the phone has no country code.
+    if (isPhoneLast10ProvidedHashed && userData.phone_last10_hashed === userData.phone) {
+      userData.phone_last10_hashed = undefined;
+    }
   }
 
   return serverEvent;
@@ -1561,7 +1612,8 @@ function shouldExitEarly(data, eventData) {
 
 function isValidValue(value) {
   const valueType = getType(value);
-  return valueType !== 'null' && valueType !== 'undefined' && value !== '' && value === value;
+  if (valueType === 'null' || valueType === 'undefined' || value !== value) return false;
+  return value !== '' && value !== 'undefined' && value !== 'null';
 }
 
 function isUIFieldTrue(field) {
@@ -1610,6 +1662,16 @@ function hashData(value) {
   return sha256Sync(makeString(value).trim().toLowerCase(), {
     outputEncoding: 'hex'
   });
+}
+
+// Ref: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/order-history-data/#field-specifications
+function getPhoneLast10Hash(rawPhone) {
+  if (!rawPhone) return;
+  const phoneStr = makeString(rawPhone);
+  if (phoneStr.match('[A-Za-z]') !== null) return;
+  const digits = phoneStr.replace(createRegex('[^0-9]', 'g'), '');
+  if (digits.length < 10) return;
+  return sha256Sync(digits.slice(-10), { outputEncoding: 'hex' });
 }
 
 function roundValue(value) {
@@ -2109,7 +2171,7 @@ scenarios:
             name: 'purchase',
             event_time: 1700000000000,
             event_source_url: 'https://example.com/checkout',
-            data: {},
+            data: { shipping: 0, tax: 0 },
             user_data: {
               esi: 'web',
               email: '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
@@ -2197,8 +2259,272 @@ scenarios:
       assertApi('gtmOnSuccess').wasNotCalled();
       assertApi('gtmOnFailure').wasCalled();
     });
+- name: '[User Data] Normalizes and hashes phone and derives phone_last10_hashed from
+    UI parameters'
+  code: |-
+    const PHONE_US_HASH = '5c83d100e0628dc56790e66e9a66935a2420e792e4279bcf099e788f9fa3624b';
+    const LAST10_US_HASH = 'bc633bcb99fe8415d14840249611c33c26f2b3236061399774c71a80650e63c1';
+
+    [
+      {
+        description: 'plaintext phone with symbols',
+        userData: [{ name: 'phone', value: '+1 (415) 555-9317' }],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      },
+      {
+        description: 'plaintext phone with leading zeros',
+        userData: [{ name: 'phone', value: '00 44 20 7946 0958' }],
+        expectedPhone: '35e206e5dec4c89b9e8b71b8c32724a5bb518483ac5a20c6617d738375b3b823',
+        expectedLast10: 'ca968f1474c2b2b1c9a1b153ff13163f54ef65300544af913f591f11cd4d80b1'
+      },
+      {
+        description: 'pre-hashed phone is passed through and last10 is not derived',
+        userData: [{ name: 'phone', value: PHONE_US_HASH }],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: undefined
+      },
+      {
+        description: 'uppercase pre-hashed phone is lowercased and last10 is not derived',
+        userData: [{ name: 'phone', value: PHONE_US_HASH.toUpperCase() }],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: undefined
+      },
+      {
+        description: 'phone with fewer than 10 digits omits last10',
+        userData: [{ name: 'phone', value: '12345' }],
+        expectedPhone: '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5',
+        expectedLast10: undefined
+      },
+      {
+        description: 'phone containing letters omits last10',
+        userData: [{ name: 'phone', value: '1-800-FLOWERS' }],
+        expectedPhone: 'e49ec846db7527df7ff483009fe61700e6435072c8c5b551ab08f0a13fc45a07',
+        expectedLast10: undefined
+      },
+      {
+        description: 'manual plaintext last10 is normalized and hashed',
+        userData: [
+          { name: 'phone', value: PHONE_US_HASH },
+          { name: 'phone_last10_hashed', value: '(415) 555-9317' }
+        ],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      },
+      {
+        description: 'manual pre-hashed last10 is passed through',
+        userData: [
+          { name: 'phone', value: '+14155559317' },
+          { name: 'phone_last10_hashed', value: LAST10_US_HASH }
+        ],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      },
+      {
+        description: 'manual plaintext last10 with fewer than 10 digits is omitted',
+        userData: [
+          { name: 'phone', value: PHONE_US_HASH },
+          { name: 'phone_last10_hashed', value: '555-9317' }
+        ],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: undefined
+      },
+      {
+        description: 'manual last10 equal to the phone hash is omitted',
+        userData: [
+          { name: 'phone', value: PHONE_US_HASH },
+          { name: 'phone_last10_hashed', value: PHONE_US_HASH }
+        ],
+        expectedPhone: PHONE_US_HASH,
+        expectedLast10: undefined
+      },
+      {
+        description: 'plaintext 10-digit phone without country code keeps the derived last10',
+        userData: [{ name: 'phone', value: '(415) 555-9317' }],
+        expectedPhone: LAST10_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      },
+      {
+        description: 'manual plaintext last10 matching a 10-digit phone is kept',
+        userData: [
+          { name: 'phone', value: '4155559317' },
+          { name: 'phone_last10_hashed', value: '4155559317' }
+        ],
+        expectedPhone: LAST10_US_HASH,
+        expectedLast10: LAST10_US_HASH
+      }
+    ].forEach((scenario) => {
+      cleanup();
+      const copyMockData = createMockData({ userDataParametersList: scenario.userData });
+
+      mock('sendHttpRequest', (url, options, body) => {
+        const userData = JSON.parse(body).events[0].user_data;
+        assertThat(userData.phone).isEqualTo(scenario.expectedPhone);
+        assertThat(userData.phone_last10_hashed).isEqualTo(scenario.expectedLast10);
+        return Promise.create((resolve) => resolve({ statusCode: 200 }));
+      });
+
+      runCode(copyMockData);
+    });
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[User Data] Auto-maps phone from an event data array and derives phone_last10_hashed'
+  code: |-
+    mockData.autoMapUserDataParameters = true;
+    mockData.userDataParametersList = [];
+    mock('getAllEventData', () => ({ phone: ['+1 (415) 555-9317'] }));
+
+    mock('sendHttpRequest', (url, options, body) => {
+      const userData = JSON.parse(body).events[0].user_data;
+      assertThat(userData.phone).isEqualTo(
+        '5c83d100e0628dc56790e66e9a66935a2420e792e4279bcf099e788f9fa3624b'
+      );
+      assertThat(userData.phone_last10_hashed).isEqualTo(
+        'bc633bcb99fe8415d14840249611c33c26f2b3236061399774c71a80650e63c1'
+      );
+      return Promise.create((resolve) => resolve({ statusCode: 200 }));
+    });
+
+    runCode(mockData);
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[User Data] Normalizes Gmail addresses before hashing the email'
+  code: |-
+    [
+      {
+        description: 'gmail.com: dots and plus suffix are removed',
+        email: ' John.Doe+promo@GMail.com ',
+        expectedEmail: '06a240d11cc201676da976f7b49341181fd180da37cbe40a77432c0a366c80c3'
+      },
+      {
+        description: 'googlemail.com: dots and plus suffix are removed',
+        email: 'john.doe+promo@googlemail.com',
+        expectedEmail: 'f07280f43150f779598094600662ad3c94d7c0a78c78b15c4056e4a38df260b9'
+      },
+      {
+        description: 'other domains are only trimmed and lowercased',
+        email: 'John.Doe+promo@Example.com',
+        expectedEmail: '61355ba9fb44067b7d6a10e66925bbab40043ac739818f9f36c02bf178b80d30'
+      },
+      {
+        description: 'empty Gmail local part after normalization omits the email',
+        email: '+promo@gmail.com',
+        expectedEmail: undefined
+      }
+    ].forEach((scenario) => {
+      cleanup();
+      const copyMockData = createMockData({
+        userDataParametersList: [
+          { name: 'email', value: scenario.email },
+          { name: 'user_id', value: 'customer_1234' }
+        ]
+      });
+
+      mock('sendHttpRequest', (url, options, body) => {
+        const userData = JSON.parse(body).events[0].user_data;
+        assertThat(userData.email).isEqualTo(scenario.expectedEmail);
+        return Promise.create((resolve) => resolve({ statusCode: 200 }));
+      });
+
+      runCode(copyMockData);
+    });
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[User Data] Auto-maps ZIP code, truncating US ZIP codes to five digits'
+  code: |-
+    [
+      { country: 'US', postalCode: '94107-1234', expectedZip: '94107' },
+      { country: 'us', postalCode: ' 94107 ', expectedZip: '94107' },
+      { country: 'BR', postalCode: '01310-100', expectedZip: '01310-100' }
+    ].forEach((scenario) => {
+      cleanup();
+      mock('getAllEventData', () => ({
+        user_data: {
+          email: '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
+          address: { postal_code: scenario.postalCode, country: scenario.country }
+        }
+      }));
+      const copyMockData = createMockData({
+        autoMapUserDataParameters: true,
+        userDataParametersList: []
+      });
+
+      mock('sendHttpRequest', (url, options, body) => {
+        const userData = JSON.parse(body).events[0].user_data;
+        assertThat(userData.zip).isEqualTo(scenario.expectedZip);
+        assertThat(userData.country_code).isEqualTo(scenario.country);
+        return Promise.create((resolve) => resolve({ statusCode: 200 }));
+      });
+
+      runCode(copyMockData);
+    });
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
+- name: '[Event Data] Defaults shipping and tax to 0 only for purchase events'
+  code: |-
+    [
+      {
+        eventName: 'purchase',
+        eventData: [],
+        expectedShipping: 0,
+        expectedTax: 0
+      },
+      {
+        eventName: 'purchase',
+        eventData: [
+          { name: 'shipping', value: '4.99' },
+          { name: 'tax', value: '' }
+        ],
+        expectedShipping: 4.99,
+        expectedTax: 0
+      },
+      {
+        eventName: 'add_to_cart',
+        eventData: [],
+        expectedShipping: undefined,
+        expectedTax: undefined
+      }
+    ].forEach((scenario) => {
+      cleanup();
+      const copyMockData = createMockData({
+        eventNameStandard: scenario.eventName,
+        eventDataParametersList: scenario.eventData
+      });
+
+      mock('sendHttpRequest', (url, options, body) => {
+        const eventPayloadData = JSON.parse(body).events[0].data;
+        assertThat(eventPayloadData.shipping).isEqualTo(scenario.expectedShipping);
+        assertThat(eventPayloadData.tax).isEqualTo(scenario.expectedTax);
+        return Promise.create((resolve) => resolve({ statusCode: 200 }));
+      });
+
+      runCode(copyMockData);
+    });
+
+    callLater(() => {
+      assertApi('sendHttpRequest').wasCalled();
+      assertApi('gtmOnSuccess').wasCalled();
+      assertApi('gtmOnFailure').wasNotCalled();
+    });
 setup: |-
   const JSON = require('JSON');
+  const Object = require('Object');
   const Promise = require('Promise');
   const callLater = require('callLater');
 
@@ -2228,8 +2554,34 @@ setup: |-
     useOptimisticScenario: false
   };
 
+  const assign = (target, source) => {
+    if (!source) return target;
+    Object.keys(source).forEach((key) => {
+      target[key] = source[key];
+    });
+    return target;
+  };
+
+  const createMockData = (overrides) => assign(assign({}, mockData), overrides);
+
+  const cleanup = () => {
+    mock('getAllEventData', () => ({}));
+    mock('getCookieValues', () => []);
+    mock('getRequestHeader', () => undefined);
+  };
+
 
 ___NOTES___
+
+2026-11-12 - Change Notes:
+  - Add the "phone_last10_hashed" user data field, generated automatically from the phone number or set manually
+  - Apply AppLovin's hashing rules: remove leading zeros from phone numbers and normalize Gmail addresses
+  - Fix pre-hashed phone numbers being hashed twice
+  - Fix phone numbers provided as an array not being mapped
+  - Fix ZIP code not being sent; US ZIP codes are trimmed to 5 digits
+  - Send shipping and tax as 0 on purchase events when not provided
+  - Update documentation links to support.applovin.com
+  - Add unit tests for the changes above
 
 2026-09-03 - Change Notes:
   - Fix request payload sent to AppLovin's Axon API: the mapped event is now nested under a top-level "events" array key ({ events: [serverEvent] }) instead of being returned as a bare array, matching Axon's expected schema
@@ -2244,4 +2596,5 @@ ___NOTES___
   - Simplify HTTP response handling to treat any non-200 status as a failure, removing the previous special-casing of 400/401 that left other error codes unhandled
 
 Created on 02/01/2026, 08:15:52
+
 
