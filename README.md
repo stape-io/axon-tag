@@ -6,7 +6,7 @@ This server-side tag allows you to send events to AppLovin via the Axon Server-t
 
 - **Event Tracking**: Supports standard events (Purchase, Page View, Add to Cart, etc.) and custom app events.
 - **Cookie Management**: Automatically extracts and stores AppLovin identifiers (`axeid`, `alart`, `axwrt`, `axcid`) to first-party cookies.
-- **PII Hashing**: Automatically hashes Email and Phone numbers using SHA-256 if provided in plain text.
+- **PII Hashing**: Automatically normalizes (including Gmail address normalization) and hashes Email and Phone numbers using SHA-256 if provided in plain text. When a plain-text phone number is available, the tag also derives and sends `phone_last10_hashed` (SHA-256 of the last 10 digits), as recommended by AppLovin.
 - **Optimistic Scenario**: Option to trigger `gtmOnSuccess()` immediately to prevent tag latency from affecting the container.
 
 ## Installation
@@ -58,7 +58,7 @@ This server-side tag allows you to send events to AppLovin via the Axon Server-t
 
 ### 5. User Data
 - **Requirements**: Requires at least one identifier (e.g., `email`, `phone`, `client_id`, `aleid`).
-- **Auto-mapping**: Maps contact info (with auto-hashing), device IDs, and location data.
+- **Auto-mapping**: Maps contact info (with auto-hashing and automatic `phone_last10_hashed` derivation), device IDs, and location data.
 - **Manual Overrides**: Set `Operating System Type` or specific user fields manually.
 
 ### 6. Measurement Data
@@ -78,7 +78,7 @@ This server-side tag allows you to send events to AppLovin via the Axon Server-t
 
 ## Useful Resources
 
-- [AppLovin Axon Documentation](https://support.axon.ai/en/growth/promoting-your-websites/axon-pixel-integration/events-and-objects)
+- [AppLovin Axon Documentation](https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/events-and-objects)
 
 ## Open Source
 
